@@ -13,6 +13,7 @@ class Person(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    
 
 class Address(Base):
     __tablename__ = 'address'
@@ -27,6 +28,27 @@ class Address(Base):
 
     def to_dict(self):
         return {}
+    
+class Users(Base):
+    __tablename__ = 'users'
+    # Here we define columns for the table person
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    firtsname = Column(String(250), nullable=False)
+    secondname = Column(String(250), nullable=False)
+    username = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+
+class Followers(Base):
+    __tablename__ = 'followers'
+    # Here we define columns for the table person
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    users_id = Column(Integer, ForeignKey('users.id'))
+    users_to_id = Column(Integer, ForeignKey('users.id'))
+   
+
+
 
 ## Draw from SQLAlchemy base
 try:
