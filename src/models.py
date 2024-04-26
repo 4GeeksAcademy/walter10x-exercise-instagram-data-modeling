@@ -41,13 +41,39 @@ class Users(Base):
 
 class Followers(Base):
     __tablename__ = 'followers'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+    
     id = Column(Integer, primary_key=True)
     users_id = Column(Integer, ForeignKey('users.id'))
     users_to_id = Column(Integer, ForeignKey('users.id'))
    
+class Post(Base):
+    __tablename__ = 'post'
+    
+    id = Column(Integer, primary_key=True)
+    users_id = Column(Integer, ForeignKey('users.id'))
+    users = relationship(Users)
 
+class Comments(Base):
+    __tablename__ = 'comments'
+    # Here we define columns for the table person
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    Comments_text = Column(String(250), nullable=False)
+    users_id = Column(Integer, ForeignKey('users.id'))
+    users=relationship(Users)
+    post_id = Column(Integer, ForeignKey('post.id'))
+    post = relationship(Post)
+
+class Media(Base):
+    __tablename__ = 'media'
+    # Here we define columns for the table person
+    # Notice that each column is also a normal Python instance attribute.
+    id = Column(Integer, primary_key=True)
+    type = Column(String(250), nullable=False)
+    type = Column(String(250), nullable=False)
+    post_id = Column(Integer, ForeignKey('post.id'))
+    post = relationship(Post)
+   
 
 
 ## Draw from SQLAlchemy base
